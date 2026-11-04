@@ -1,0 +1,20 @@
+{
+  "name": "newsflow-bdd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cucumber.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "cucumber-js",
+    "test:dry": "cucumber-js --dry-run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@cucumber/cucumber": "^13.3.0"
+  }
+}
