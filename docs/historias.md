@@ -1,7 +1,5 @@
 # Histórias de usuário — NewsFlow
 
-> As histórias US03 e US04 serão acrescentadas pelo outro membro da dupla.
-
 ## US01 — Salvar rascunho automaticamente
 
 **Como** redatora
@@ -38,3 +36,41 @@
 **Regras cobertas:** RN02
 **Prioridade:** Alta — um e-mail com erro, depois de disparado, não pode ser desfeito.
 **Cenários:** `features/us02-aprovacao.feature`
+
+---
+
+## US03 — Agendar envio
+
+**Como** gestora de comunicação
+**Quero** agendar, reagendar ou cancelar o envio de uma edição aprovada
+**Para** que ela chegue no melhor horário sem eu precisar apertar o botão na hora
+
+**Critérios de aceitação**
+
+- O envio só pode ser agendado para no mínimo 15 minutos à frente, no fuso America/Sao_Paulo (horário de Brasília).
+- Um envio agendado pode ser reagendado no máximo 2 vezes, sempre respeitando os 15 minutos de antecedência.
+- Um envio agendado pode ser cancelado até 5 minutos antes do horário marcado; depois disso, segue como está.
+- Só uma edição aprovada pode ser agendada (portão da RN02).
+
+**Regras cobertas:** RN03 (e RN02, no portão de aprovação)
+**Prioridade:** Alta — sem agendamento a gestora fica refém do horário, e um envio que não pode ser cancelado a tempo vira erro público.
+**Cenários:** `features/us03-agendamento.feature`
+
+---
+
+## US04 — Enviar a edição só para os segmentos escolhidos
+
+**Como** gestora de comunicação
+**Quero** escolher para quais segmentos de assinantes a edição vai
+**Para** que cada público receba só o que interessa, sem e-mail repetido
+
+**Critérios de aceitação**
+
+- Uma edição pode ir para no máximo 5 segmentos.
+- Se algum segmento escolhido não tiver assinantes, o agendamento é bloqueado e nada fica agendado.
+- Quem está em mais de um segmento escolhido recebe um único e-mail da edição.
+- Assinantes de segmentos não escolhidos não recebem a edição.
+
+**Regras cobertas:** RN04
+**Prioridade:** Média — o envio funciona sem refinamento de público, mas e-mail duplicado ou fora do perfil desgasta a lista e aumenta descadastros.
+**Cenários:** `features/us04-segmentacao.feature`

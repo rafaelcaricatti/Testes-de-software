@@ -9,6 +9,19 @@ class MundoDoNewsFlow {
     this.usuario = null // quem está "logado" no cenário
     this.edicao = null // a edição com que o cenário trabalha
     this.resultado = null // retorno da última ação (ok + mensagem)
+    this.disparo = null // o envio agendado com que o cenário trabalha (US03/US04)
+  }
+
+  // "Daqui a N minutos" sempre a partir do relógio falso do domínio.
+  daquiAMinutos(minutos) {
+    return new Date(this.servico.agora().getTime() + minutos * 60 * 1000)
+  }
+
+  // Agenda como pré-condição (Dado): se falhar, o cenário foi mal montado.
+  agendarComoPreCondicao(segmentos, minutos) {
+    const r = this.servico.agendar(this.edicao, segmentos, this.daquiAMinutos(minutos), this.usuario)
+    if (!r.ok) throw new Error(`Pré-condição falhou ao agendar: ${r.mensagem}`)
+    this.disparo = r.disparo
   }
 
   avancarSegundos(segundos) {
